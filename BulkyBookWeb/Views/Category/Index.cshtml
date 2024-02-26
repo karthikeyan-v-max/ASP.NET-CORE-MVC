@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    if(TempData["sucess"]!=null){
+        <h1>@TempData["sucess"]</h1>
+    }
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Category List </h2>
+        </div>
+        <div class="col-6">
+            <a asp-controller="Category" asp-action="Create" class="btn-outline-primary">
+                <i class="bi bi-plus-circle"></i>&nbsp;Create New Category
+            </a>
+        </div>
+    </div>
+
+<table class="table table-bordred table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Category Name
+
+            </th>
+            <th>
+                Category Order Number
+
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="50%">@obj.Name</td>
+                <td width="30%">@obj.DisplayOrder</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id" class="btn-primary mx-2 text-bg-light">
+                                <i class="bi bi-pencil-square"></i>
+                                Edit</a>
+                    </div>
+                </td>
+                <td>
+                    <div class="w-75 btn-danger" role="group">
+                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id" class="btn-primary mx-2 text-bg-light">
+                                <i class="bi bi-trash3"></i>
+                            
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
